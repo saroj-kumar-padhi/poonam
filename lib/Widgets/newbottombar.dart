@@ -9,6 +9,7 @@ import 'package:pujapurohit/Pages/PanditSection/Controllers/serving_Cities.dart'
 import 'package:pujapurohit/Pages/PanditSection/Widgets/responsive.dart';
 import 'package:pujapurohit/Widgets/Loader.dart';
 import 'package:pujapurohit/Widgets/Texts.dart';
+import 'package:pujapurohit/Widgets/Company/foryou.dart';
 import 'package:pujapurohit/controller/LocationController.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -61,17 +62,17 @@ class NewBottomBar extends StatelessWidget{
                               children: [
                                 Text1(data: "COMPANY", max: 24, min: 20,clr: Colors.black87,weight: FontWeight.bold,space: 2.0,),
                                 SizedBox(height: 15,),
-                                bottom_tabs("WHO WE ARE"),
+                                bottom_tabs("WHO WE ARE",PrivacyPage()),
+                                SizedBox(height: 10),
+                                bottom_tabs("Blog",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("Blog"),
+                                bottom_tabs("Careers",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("Careers"),
+                                bottom_tabs("Report Fraud",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("Report Fraud"),
+                                bottom_tabs("Contatct",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("Contatct"),
-                                SizedBox(height: 10,),
-                                bottom_tabs("Investor Relations"),
+                                bottom_tabs("Investor Relations",PrivacyPage()),
                                 SizedBox(height: 10,)
                               ],
                             ),
@@ -80,11 +81,11 @@ class NewBottomBar extends StatelessWidget{
                               children: [
                                 Text1(data: "FOR PARTNERS", max: 24, min: 20,clr: Colors.black87,weight: FontWeight.bold,space: 2.0,),
                                 SizedBox(height: 15,),
-                                bottom_tabs("Become Purohit"),
+                                bottom_tabs("Become Purohit",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("Register Jagrata Band"),
+                                bottom_tabs("Register Jagrata Band",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("Temple Applications"),
+                                bottom_tabs("Temple Applications",PrivacyPage()),
                                 SizedBox(height: 10,),
                                 
                               ],
@@ -94,13 +95,13 @@ class NewBottomBar extends StatelessWidget{
                               children: [
                                 Text1(data: "FOR YOU", max: 24, min: 20,clr: Colors.black87,weight: FontWeight.bold,space: 2.0,),
                                 SizedBox(height: 15,),
-                                bottom_tabs("Privacy"),
+                                bottom_tabs("Privacy",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("Terms"),
+                                bottom_tabs("Terms",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("Security"),
+                                bottom_tabs("Security",PrivacyPage()),
                                 SizedBox(height: 10,),
-                                bottom_tabs("FAQ"),
+                                bottom_tabs("FAQ",PrivacyPage()),
                                 SizedBox(height: 10,),
                                 
                               ],
@@ -213,19 +214,20 @@ class NewBottomBar extends StatelessWidget{
                     ),
     );
   }
-
-  Widget bottom_tabs(String data) {
-    return Link(uri: Uri.parse(""), builder: (_,link){
-      return InkWell(
-      onTap:link,
-      hoverColor: Colors.transparent,
-      child: HoverWidget(
-        onHover: (event){},
-        hoverChild:Text1(data: "$data", max: 24, min: 20,clr: Colors.black54,) ,
-        child: Text1(data: "$data", max: 22, min: 18,clr: Colors.black54,)),
-    );
-    });
-  }
+  
+ 
+  // Widget bottom_tabs(String data,String path) {
+  //   return Link(uri: Uri.parse(path), builder: (_,link){
+  //     return InkWell(
+  //     onTap:(){},
+  //     hoverColor: Colors.transparent,
+  //     child: HoverWidget(
+  //       onHover: (event){},
+  //       hoverChild:Text1(data: "$data", max: 24, min: 20,clr: Colors.black54,) ,
+  //       child: Text1(data: "$data", max: 22, min: 18,clr: Colors.black54,)),
+  //   );
+  //   });
+  // }
 
   Widget serving_cities(String city,double lat, double lng){
     LocationController locationController = Get.put(LocationController());
@@ -321,3 +323,28 @@ class MobileBottomBar extends StatelessWidget{
   }
 
 }
+class bottom_tabs extends StatelessWidget {
+    String data;
+    Widget path;
+    bottom_tabs(this.data,this.path);
+  
+    @override
+    Widget build(BuildContext context) {
+     return InkWell(
+      onTap:(){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => path,
+                  ),
+          );
+      },
+      hoverColor: Colors.transparent,
+      child: HoverWidget(
+        onHover: (event){},
+        hoverChild:Text1(data: "$data", max: 24, min: 20,clr: Colors.black54,) ,
+        child: Text1(data: "$data", max: 22, min: 18,clr: Colors.black54,)),
+    );
+  
+    }
+  }
